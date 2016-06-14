@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.hummingbird.common.controller.BaseController;
+import com.hummingbird.common.exception.AuthorityException;
 import com.hummingbird.common.exception.ValidateException;
 import com.hummingbird.common.util.PropertiesUtil;
 import com.hummingbird.common.util.RequestUtil;
@@ -36,7 +37,7 @@ public class RequestAccessInterceptor extends HandlerInterceptorAdapter {
 		String hasKey = System.getProperty("hasKey");
 		if("false".equals(hasKey){
  			log.debug("当前服务器未授权运行此程序");
-			System.exit(0);
+ 			throw new AuthenticationException(500,"当前服务器未授权运行此程序");
 		}
 		String requestIp = getIpAddr(request);
 		//log.info("访问的地址是" + requestIp);

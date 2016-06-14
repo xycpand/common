@@ -62,6 +62,7 @@ public class StartLoadListener implements ServletContextListener {
 	}
 	
      private void checkKey(){ 
+    	 log.debug("开始检查key:");
          String hasKey = "false";
     	 PropertiesUtil pu=new PropertiesUtil();
     	 String requiredMac = pu.getProperty("whoareu");
@@ -92,6 +93,7 @@ public class StartLoadListener implements ServletContextListener {
  	    	}
     	 }
     	 System.setProperty("hasKey", hasKey); 
+    	 log.debug("结束检查key，key值为："+hasKey);
     }
 
 }
