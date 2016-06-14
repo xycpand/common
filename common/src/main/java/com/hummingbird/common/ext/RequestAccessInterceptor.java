@@ -33,7 +33,11 @@ public class RequestAccessInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
-		
+		String hasKey = System.getProperty("hasKey");
+		if("false".equals(hasKey){
+ 			log.debug("当前服务器未授权运行此程序");
+			System.exit(0);
+		}
 		String requestIp = getIpAddr(request);
 		//log.info("访问的地址是" + requestIp);
 		
