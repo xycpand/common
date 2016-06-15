@@ -82,6 +82,11 @@ public class ControllerMethodInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
+		String hasKey = System.getProperty("hasKey");
+		if("false".equals(hasKey){
+ 			log.debug("当前服务器未授权运行此程序");
+ 			throw new AuthenticationException(500,"当前服务器未授权运行此程序");
+		}
 		HandlerMethod handlerMethod = (HandlerMethod) handler;
 		Method method = handlerMethod.getMethod();
 		BaseController bc = (BaseController) handlerMethod.getBean();
